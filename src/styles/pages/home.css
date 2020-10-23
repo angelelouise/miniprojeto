@@ -1,0 +1,46 @@
+#page-home {
+    box-sizing: border-box;
+    height: 100vh;
+    background: linear-gradient(329.54deg, #29B6D1 0%, #00C7C7 100%);
+    padding: 100px 30px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+#page-home .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Float four columns side by side */
+#page-home .column {
+    width: 32%;
+    flex: 1;
+    float: left;
+    padding: 10px 10px;
+}
+
+/* Style the counter cards */
+#page-home .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+}
+
+#page-home .pic {
+    max-width:25%;
+    height:auto;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
