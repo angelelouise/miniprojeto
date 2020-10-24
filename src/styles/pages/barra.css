@@ -1,0 +1,38 @@
+.barra{
+    background-color: #15C3D6;
+    position: absolute;
+    width: 96px;
+    height: 100vh;
+    left: 0px;
+    top: 0px;
+}
+.logo-barra{
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 3.9%;
+    bottom: 89.27%;
+}
+.btn{
+    background-color: #ffff;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    bottom: 5%;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#btn-voltar{
+    position: center;
+}
+
+#logo{
+    max-width:100%;
+}

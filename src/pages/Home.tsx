@@ -11,7 +11,7 @@ function Home(){
             <div id="row">
                 <div className="column" id="curso">
                     <div className="card">
-                        <Link to="/Curso">
+                        <Link to="/curso-list">
                             <img className="pic" src={books}></img>
                             <h1>Cursos</h1>
                             <p>Configurar cursos, estruturas currículares e disciplina</p>
