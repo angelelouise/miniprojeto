@@ -1,53 +1,73 @@
 import React from 'react';
+import api from './api';
+import Estruturas from "./estruturas";
 
 class Cursos extends React.Component {
 
-    state = {
-        cursos: []
-    };
-
+    constructor(props){
+        super(props);
+        this.state = {
+            cursos: [] , url:this.props.url, method:this.props.method, curso:this.props.curso
+        };
+    }
     componentDidMount() {
+        if(this.state.method ==='get'){
+            api.get(this.state.url).then((cursosRes)=>{
+                this.setState({cursos : cursosRes.data});
+            })
+        }else if(this.state.method==='post'){
 
-    }
-
-    getCursos(){
-        return fetch('http://localhost:3333/cursos/', {
-            method: 'GET'
-        })
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    cursos: res
-                });
-            });
-    }
-    getCurso(codigo){
-        return fetch('http://localhost:3333/cursos/codigo/'+codigo, {
-            method: 'GET'
-        })
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    cursos: res
-                });
-            });
+        }
+        // return fetch('http://localhost:3333/cursos/', {
+        //     method: 'GET'
+        // })
+        //     .then(res => res.json())
+        //     .then(res => {
+        //         this.setState({
+        //             cursos: res
+        //         });
+        //     });
     }
 
     render() {
-        return (
-            <div>
-                <ul>
-                    {this.state.cursos.map(item => (
-                        <li key={item.id}>
-                            <p><b>Codigo:</b> {item.descricao}</p>
-                            <p><b>Nome:</b> {item.nome}</p>
-                            <p><b>Descricao:</b> {item.descricao}</p>
-                            <p><b>Data de criação:</b> {item.data_criacao}</p>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        );
+        if(Object.keys(this.state.cursos).length === 0){
+            return (
+                <div>
+                    <p>Não há cursos cadastrados</p>
+                </div>
+            );
+        }else{
+            return (
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <td><b>Codigo</b></td>
+                            <td><b>Nome</b></td>
+                            <td><b>Descricao</b></td>
+                            <td><b>Data de criação</b> </td>
+                        </tr>
+                        </thead>
+                        {this.state.cursos.map(item => (
+                            <tbody>
+                            <tr key={item.id}>
+                                <td> {item.codigo}</td>
+                                <td> {item.nome}</td>
+                                <td> {item.descricao}</td>
+                                <td> {item.data_criacao}</td>
+                            </tr>
+                            <tr>
+                                <Estruturas method="get" url={`/estruturas/curso/${item.id}`}/>
+                            </tr>
+                            </tbody>
+                        ))}
+
+
+                    </table>
+                </div>
+            );
+        }
+
     }
 }
 

@@ -15,7 +15,7 @@ function Cursolista() {
                 <div className="content-curso-lista">
                     <div className="form-dados">
                         <h1>Cursos</h1>
-                        <Cursos/>
+                        <Cursos method="get" url="/cursos"/>
                     </div>
                 </div>
             </div>
