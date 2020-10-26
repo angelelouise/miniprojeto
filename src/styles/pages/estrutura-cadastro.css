@@ -1,0 +1,10 @@
+#estrutura-cadastro{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding-top: 10%;
+    padding-left: 20%;
+    /*padding-right: 10%;*/
+}

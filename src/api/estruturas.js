@@ -36,7 +36,6 @@ class Estruturas extends React.Component {
                         </tr>
                         <tr>
                             <td></td>
-                            <td><b>Codigo</b></td>
                             <td><b>Nome</b></td>
                             <td><b>Descricao</b></td>
                         </tr>
@@ -45,7 +44,6 @@ class Estruturas extends React.Component {
                         <tbody>
                             <tr key={item.id}>
                                 <td> </td>
-                                <td> {item.descricao}</td>
                                 <td> {item.nome}</td>
                                 <td> {item.descricao}</td>
                             </tr>
