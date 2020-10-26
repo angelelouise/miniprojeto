@@ -15,18 +15,7 @@ class Cursos extends React.Component {
             api.get(this.state.url).then((cursosRes)=>{
                 this.setState({cursos : cursosRes.data});
             })
-        }else if(this.state.method==='post'){
-
         }
-        // return fetch('http://localhost:3333/cursos/', {
-        //     method: 'GET'
-        // })
-        //     .then(res => res.json())
-        //     .then(res => {
-        //         this.setState({
-        //             cursos: res
-        //         });
-        //     });
     }
 
     render() {

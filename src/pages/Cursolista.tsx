@@ -1,16 +1,17 @@
-import React from "react";
+import React, {useCallback} from "react";
 import '../styles/pages/curso-lista.css';
 import '../styles/pages/btn-create.css';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Barra from './Barra';
 import Cursos from '../api/cursos';
 
 function Cursolista() {
-
+    const history = useHistory();
+    const handleOnClick = useCallback(() => history.push('/curso/criar'), [history]);
     return(
         <div className="curso-lista">
             <Barra/>
-            <button className="btn-create" id="cadastrar-curso"> Cadastrar curso</button>
+            <button className="btn-create" id="redirect-curso" onClick={handleOnClick}> Cadastrar curso</button>
             <div className="content-page">
                 <div className="content-curso-lista">
                     <div className="form-dados">

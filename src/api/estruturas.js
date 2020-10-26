@@ -22,7 +22,7 @@ class Estruturas extends React.Component {
         if(Object.keys(this.state.estruturas).length === 0){
             return (
             <div>
-                <p>Não há estruturas currículares cadastradas</p>
+                <p>Não há estruturas curriculares cadastradas</p>
             </div>
             );
         }else{

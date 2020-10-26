@@ -2,6 +2,6 @@ export interface Curso{
     id: bigint,
     nome : string,
     descricao : string,
-    código : bigint,
+    código : string,
     data_criacao : string
 }
