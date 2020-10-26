@@ -1,19 +1,25 @@
 import React, {Dispatch, SetStateAction, useCallback} from "react";
-import '../styles/pages/btn-create.css';
 import { useHistory } from 'react-router-dom';
-import Barra from './Barra';
+import Barra from '../js/Barra';
 import api from '../api/api';
 import {Curso} from "../modelos/curso";
-import ModalCadastro from './ModalCadastro';
+import ModalCadastro from '../js/ModalCadastro';
+import { Form, Button } from 'react-bootstrap';
+import '../styles/pages/curso-cadastro.css';
+// import '../styles/pages/btn-create.css';
 
-class CursoCadastro extends React.Component {
+class CursoCadastro extends React.Component<Curso> {
 
     state = {
         codigo: '',
         nome: '',
         descricao: '',
         data_criacao: '',
-        show:false
+        show:false,
+        redirect: '/curso/listar',
+        validoNome:false,
+        validoCodigo:false,
+        desabilitado: true
     }
 
     handleOnClick =()=>{
@@ -21,17 +27,39 @@ class CursoCadastro extends React.Component {
     }
     handleChangeCodigo = (event: { target: { value: string; }; }) => {
         const hoje = new Date()
+        if(!(event.target.value.length ===0)){
+            this.setState({
+                codigo: event.target.value,
+                data_criacao: hoje.toLocaleString("pt-BR"),
+                validoNome: true});
 
-        this.setState({
-            codigo: event.target.value,
-            data_criacao: hoje.toLocaleString("pt-BR")});
+        }else{
+            this.setState({
+                validoNome: false});
+        }
+
+        if(this.state.validoNome && this.state.validoCodigo){
+            this.setState({
+                desabilitado: false});
+        }
     }
     handleChangeNome = (event: { target: { value: string; }; }) => {
         const hoje = new Date()
+        if(!(event.target.value.length ===0)){
+            this.setState({
+                nome: event.target.value,
+                data_criacao: hoje.toLocaleString("pt-BR"),
+                validoCodigo: true});
+        }else{
+            this.setState({
+                validoCodigo: false});
+        }
 
-        this.setState({
-            nome: event.target.value,
-            data_criacao: hoje.toLocaleString("pt-BR")});
+        if(this.state.validoNome && this.state.validoCodigo){
+            this.setState({
+                desabilitado: false});
+        }
+
     }
     handleChangeDescricao = (event: { target: { value: string; }; }) => {
         const hoje = new Date()
@@ -47,44 +75,55 @@ class CursoCadastro extends React.Component {
     }
     handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        this.setState({show: true})
-        api.post(`/cursos`, {
+        if(!this.state.desabilitado){
+            this.setState({show: true})
+            api.post(`/cursos`, {
                 nome: this.state.nome.toString(),
                 descricao: this.state.descricao.toString(),
                 data_criacao: this.state.data_criacao.toString(),
                 codigo: this.state.codigo.toString()
             })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                if(res.status === 200 && res.data.success === true)
-                {
-                    this.setState({show: true})
-                    this.showModal()
-                }
-            })
-
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                    if(res.status === 200 && res.data.success === true)
+                    {
+                        this.setState({show: true})
+                        this.showModal()
+                    }
+                })
+        }
     }
     render() {
         return(
-            <div className="curso-lista">
-                <Barra/>
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Codigo:
-                            <input type="int" id="input-codigo" name="codigo" onChange={this.handleChangeCodigo} />
-                        </label>
-                        <label>
-                            Nome:
-                            <input type="text" id="input-name" name="nome" onChange={this.handleChangeNome} />
-                        </label>
-                        <label>
-                            Descrição:
-                            <input type="text" id="input-descricao" name="descricao"  onChange={this.handleChangeDescricao}/>
-                        </label>
-                        <button className="btn-create" id="cadastrar-curso" type="submit" > Cadastrar curso</button>
-                    </form>
+            <div >
+
+                <Barra redirect={"/curso/listar"}/>
+                <div id="curso-cadastro">
+                    <h1 className={"text-display"}>Cadastrar Curso</h1>
+                    <Form className="col-sm-10" onSubmit={this.handleSubmit}>
+                        <Form.Group controlId="formGroupCodigo">
+                            <Form.Label>Codigo:</Form.Label>
+                            <Form.Control className="form-control form-control-lg" type="int" id="input-codigo" name="codigo" onChange={this.handleChangeCodigo} />
+                            {!this.state.validoNome ? <span style={{color: "red"}}>Campo obrigatório não informado</span> : ''}
+                        </Form.Group>
+                        <Form.Group controlId="formGroupCodigo">
+                            <Form.Label>Nome:</Form.Label>
+                            <Form.Control className="form-control form-control-lg" type="text" id="input-name" name="nome" onChange={this.handleChangeNome} />
+                            {!this.state.validoCodigo ? <span style={{color: "red"}}>Campo obrigatório não informado</span> : ''}
+                        </Form.Group>
+                        <Form.Group controlId="formGroupDescricao">
+                            <Form.Label>Descrição:</Form.Label>
+                            <Form.Control className="form-control form-control-lg" type="text" id="input-descricao" name="descricao"  onChange={this.handleChangeDescricao}/>
+                        </Form.Group>
+                        <br />
+                        <br />
+                        <button className="btnC" id="cadastrar-curso" type="submit" >Cadastrar curso</button>
+                        <Form.Group controlId="formGroupInput">
+
+                        </Form.Group>
+                    </Form>
+
                     {this.state.show ? (<ModalCadastro show={true}/>) :null}
                 </div>
             </div>

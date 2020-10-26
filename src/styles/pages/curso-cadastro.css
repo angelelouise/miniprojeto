@@ -1,0 +1,28 @@
+.content-display aside{
+    height: 100vh;
+    width: 100vw;
+    display: inline-flex;
+    position: relative;
+    padding: 80px;
+}
+
+#curso-cadastro{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding-top: 10%;
+    padding-left: 20%;
+    /*padding-right: 10%;*/
+}
+
+.btnC{
+    border-radius: 4px;
+    background-color: #15C3D6;
+    text-align: center;
+    color: #f1f1f1;
+    border: none;
+    padding: 15px 25px;
+    font-size: 24px;
+}

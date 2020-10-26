@@ -1,6 +1,9 @@
 import React from 'react';
 import api from './api';
 import Estruturas from "./estruturas";
+import { Table } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {GrAddCircle} from "react-icons/gr";
 
 class Cursos extends React.Component {
 
@@ -27,33 +30,33 @@ class Cursos extends React.Component {
             );
         }else{
             return (
-                <div>
-                    <table>
-                        <thead>
+                <Table striped responsive>
+                    <thead>
                         <tr>
-                            <td><b>Codigo</b></td>
-                            <td><b>Nome</b></td>
-                            <td><b>Descricao</b></td>
-                            <td><b>Data de criação</b> </td>
+                            <th><b>Codigo</b></th>
+                            <th><b>Nome</b></th>
+                            <th><b>Descricao</b></th>
+                            <th><b>Data de criação</b> </th>
+                            <th> </th>
                         </tr>
-                        </thead>
-                        {this.state.cursos.map(item => (
-                            <tbody>
+                    </thead>
+                    {this.state.cursos.map(item => (
+                        <tbody>
                             <tr key={item.id}>
                                 <td> {item.codigo}</td>
                                 <td> {item.nome}</td>
                                 <td> {item.descricao}</td>
                                 <td> {item.data_criacao}</td>
+                                <td> <GrAddCircle tooltip={"Cadastrar Estruturas"}>add_circle</GrAddCircle> </td>
                             </tr>
                             <tr>
-                                <Estruturas method="get" url={`/estruturas/curso/${item.id}`}/>
+                                <td colspan="4">
+                                    <Estruturas method="get" url={`/estruturas/curso/${item.id}`}/>
+                                </td>
                             </tr>
-                            </tbody>
-                        ))}
-
-
-                    </table>
-                </div>
+                        </tbody>
+                    ))}
+                </Table>
             );
         }
 

@@ -3,9 +3,9 @@
     width: 100vw;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 .content-page{
+    padding: 60px;
     position: relative;
     display: flex;
     align-items: flex-start;

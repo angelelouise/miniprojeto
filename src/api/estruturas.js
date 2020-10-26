@@ -1,5 +1,7 @@
 import React from "react";
 import api from './api';
+import { Table } from 'react-bootstrap';
+import {GrAddCircle} from "react-icons/gr";
 
 class Estruturas extends React.Component {
     constructor(props){
@@ -21,27 +23,35 @@ class Estruturas extends React.Component {
     render() {
         if(Object.keys(this.state.estruturas).length === 0){
             return (
-            <div>
-                <p>Não há estruturas curriculares cadastradas</p>
-            </div>
+                <Table>
+                    <tr><b>Não há estruturas curriculares cadastradas</b></tr>
+                </Table>
             );
         }else{
             return (
-                <table>
-                    <tr>Estrutura Currículares</tr>
-                    <tr>
-                        <td><b>Codigo</b></td>
-                        <td><b>Nome</b></td>
-                        <td><b>Descricao</b></td>
-                    </tr>
-                    {this.state.estruturas.map(item => (
-                        <tr key={item.id}>
-                            <td> {item.descricao}</td>
-                            <td> {item.nome}</td>
-                            <td> {item.descricao}</td>
+                <Table responsive>
+                    <thead >
+                        <tr>
+                            <td colspan="4"><b>Estrutura Curriculares</b></td>
                         </tr>
+                        <tr>
+                            <td></td>
+                            <td><b>Codigo</b></td>
+                            <td><b>Nome</b></td>
+                            <td><b>Descricao</b></td>
+                        </tr>
+                    </thead>
+                    {this.state.estruturas.map(item => (
+                        <tbody>
+                            <tr key={item.id}>
+                                <td> </td>
+                                <td> {item.descricao}</td>
+                                <td> {item.nome}</td>
+                                <td> {item.descricao}</td>
+                            </tr>
+                        </tbody>
                     ))}
-                </table>
+                </Table>
             );
         }
 
