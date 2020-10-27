@@ -29,8 +29,8 @@ class EstruturaCadastro extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            curso: this.props.curso.curso,
-            id_curso: this.props.curso.id_curso,
+            curso: this.props.curso,
+            id_curso: this.props.curso,
             // codigo: '',
             nome: '',
             descricao: '',

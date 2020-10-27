@@ -2,6 +2,7 @@ import React from "react";
 import api from './api';
 import { Table } from 'react-bootstrap';
 import {GrAddCircle} from "react-icons/gr";
+import Disciplinas from "./disciplinas";
 
 class Estruturas extends React.Component {
     constructor(props){
@@ -34,11 +35,6 @@ class Estruturas extends React.Component {
                         <tr>
                             <td colspan="4"><b>Estrutura Curriculares</b></td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td><b>Nome</b></td>
-                            <td><b>Descricao</b></td>
-                        </tr>
                     </thead>
                     {this.state.estruturas.map(item => (
                         <tbody>
@@ -46,6 +42,11 @@ class Estruturas extends React.Component {
                                 <td> </td>
                                 <td> {item.nome}</td>
                                 <td> {item.descricao}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="4">
+                                    <Disciplinas method="get" url={`/disciplinas/estrutura/${item.id}`}/>
+                                </td>
                             </tr>
                         </tbody>
                     ))}

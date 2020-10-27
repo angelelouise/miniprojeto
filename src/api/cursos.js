@@ -43,7 +43,7 @@ class Cursos extends React.Component {
             );
         }else{
             return (
-                <Table striped responsive>
+                <Table className="table-striped table-hover"  responsive>
                     <thead>
                         <tr>
                             <th><b>Codigo</b></th>
